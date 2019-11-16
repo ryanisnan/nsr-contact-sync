@@ -13,6 +13,14 @@ class Contact(models.Model):
 
     logo = models.ImageField(null=True, blank=True)
 
+    def __unicode__(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        elif self.company:
+            return f"{self.company} - {self.title}"
+        
+        return "Unnamed contact"
+
 
 class PhoneNumber(models.Model):
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
